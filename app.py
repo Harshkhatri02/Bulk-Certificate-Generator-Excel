@@ -40,7 +40,8 @@ def create_connection():
             password = parsed.password or os.getenv('DB_PASSWORD')
             host = parsed.hostname
             port = parsed.port or 3306
-            database = parsed.path.strip('/') if parsed.path else os.getenv('DB_NAME')
+            # Use DB_NAME from environment with certificate-gen as fallback
+            database = os.getenv('DB_NAME', 'certificate-gen')
             
             connection = mysql.connector.connect(
                 host=host,
@@ -55,7 +56,7 @@ def create_connection():
                 host=os.getenv('DB_HOST'),
                 user=os.getenv('DB_USER'),
                 password=os.getenv('DB_PASSWORD'),
-                database=os.getenv('DB_NAME')
+                database=os.getenv('DB_NAME', 'certificate-gen')  # Use environment variable with fallback
             )
         
         logger.info("Database connection successful")
