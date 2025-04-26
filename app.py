@@ -10,21 +10,36 @@ import qrcode
 from werkzeug.security import generate_password_hash, check_password_hash
 from mysql.connector import Error
 from dotenv import load_dotenv
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', os.urandom(24))  # Use environment variable for secret key
+app.secret_key = os.getenv('SECRET_KEY')
+
+# Ensure upload directories exist
+os.makedirs('static/uploads', exist_ok=True)
+os.makedirs('certificates', exist_ok=True)
+os.makedirs('outputs', exist_ok=True)
 
 def create_connection():
-    connection = mysql.connector.connect(
-        host=os.getenv('DB_HOST', 'localhost'),
-        user=os.getenv('DB_USER', 'root'),
-        password=os.getenv('DB_PASSWORD', ''),
-        database=os.getenv('DB_NAME', 'certificateGen')
-    )
-    return connection
+    try:
+        connection = mysql.connector.connect(
+            host=os.getenv('DB_HOST'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            database=os.getenv('DB_NAME')
+        )
+        logger.info("Database connection successful")
+        return connection
+    except Error as e:
+        logger.error(f"Database connection failed: {e}")
+        return None
 
 def insert_update(connection, email):
     try:
@@ -117,33 +132,53 @@ def insert_review(description, oid):
 def insert_organisation(email, institution, password, iagree):
     try:
         conn = create_connection()
+        if conn is None:
+            flash("Unable to connect to database. Please try again later.")
+            return False
+            
         cursor = conn.cursor()
         hashed_password = generate_password_hash(password)
         query = "INSERT INTO organisation (email, institution, password, Iagree) VALUES (%s, %s, %s, %s)"
         cursor.execute(query, (email, institution, hashed_password, iagree))
         conn.commit()
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        flash("Database error occurred. Please try again.")
-    finally:
-        cursor.close()
-        conn.close()
-# SignIN Organisations
-def validate_login(email, password):
-    conn = create_connection()
-    cursor = conn.cursor()
-    
-    query = "SELECT password FROM organisation WHERE email = %s"
-    cursor.execute(query, (email,))
-    result = cursor.fetchone()
-    
-    cursor.close()
-    conn.close()
-    # Tuple , tuple[0],input pass
-    print(result,result[0],password)
-    if result and check_password_hash(result[0], password):
+        logger.info(f"Successfully registered user: {email}")
         return True
-    return False
+    except mysql.connector.Error as err:
+        logger.error(f"Database error during registration: {err}")
+        flash("Database error occurred. Please try again.")
+        return False
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'conn' in locals() and conn.is_connected():
+            conn.close()
+
+def validate_login(email, password):
+    try:
+        conn = create_connection()
+        if conn is None:
+            flash("Unable to connect to database. Please try again later.")
+            return False
+            
+        cursor = conn.cursor()
+        query = "SELECT password FROM organisation WHERE email = %s"
+        cursor.execute(query, (email,))
+        result = cursor.fetchone()
+        
+        if result and check_password_hash(result[0], password):
+            logger.info(f"Successful login for user: {email}")
+            return True
+        logger.warning(f"Failed login attempt for user: {email}")
+        return False
+    except mysql.connector.Error as err:
+        logger.error(f"Database error during login: {err}")
+        flash("Database error occurred. Please try again.")
+        return False
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'conn' in locals() and conn.is_connected():
+            conn.close()
 
 # Base SignUP and Login Route
 @app.route("/signupAndLogin", methods=["GET", "POST"])
@@ -157,27 +192,38 @@ def signup_and_login():
             iagree = request.form.get("iagree") == 'on'
 
             # Check if email already exists
-            conn = create_connection()
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM organisation WHERE email = %s", (email,))
-            existing_user = cursor.fetchone() #Take First record 
-            cursor.close()
-            conn.close()
+            try:
+                conn = create_connection()
+                if conn is None:
+                    flash("Unable to connect to database. Please try again later.")
+                    return redirect("/signupAndLogin")
+                    
+                cursor = conn.cursor()
+                cursor.execute("SELECT * FROM organisation WHERE email = %s", (email,))
+                existing_user = cursor.fetchone()
+                
+                if existing_user:
+                    flash("Email already exists. You can SignIn!")
+                    return redirect("/signupAndLogin")
 
-            if existing_user:
-                flash("Email already exists. You can SignIn!")
+                if insert_organisation(email, institution, password, iagree):
+                    flash("Sign up successful! You can now log in.")
                 return redirect("/signupAndLogin")
-
-            insert_organisation(email, institution, password, iagree)
-            flash("Sign up successful! You can now log in.")
-            return redirect("/signupAndLogin")
+            except mysql.connector.Error as err:
+                logger.error(f"Database error checking existing user: {err}")
+                flash("An error occurred. Please try again.")
+                return redirect("/signupAndLogin")
+            finally:
+                if 'cursor' in locals():
+                    cursor.close()
+                if 'conn' in locals() and conn.is_connected():
+                    conn.close()
 
         elif action == "Login":
             email = request.form.get("luname")
             password = request.form.get("lpass")
             if validate_login(email, password):
-                # class Werkzeug.local.LocalProxy's object
-                session['user_email'] = email  # Store email in session
+                session['user_email'] = email
                 flash("Login successful!")
                 return redirect("/home")
             else:
