@@ -11,6 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from mysql.connector import Error
 from dotenv import load_dotenv
 import logging
+from urllib.parse import urlparse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -29,12 +30,34 @@ os.makedirs('outputs', exist_ok=True)
 
 def create_connection():
     try:
-        connection = mysql.connector.connect(
-            host=os.getenv('DB_HOST'),
-            user=os.getenv('DB_USER'),
-            password=os.getenv('DB_PASSWORD'),
-            database=os.getenv('DB_NAME')
-        )
+        # Get the database URL from environment variable
+        db_url = os.getenv('DB_HOST')
+        
+        if db_url and ('mysql://' in db_url or '@' in db_url):
+            # Parse the URL if it's in the format mysql://user:pass@host:port/db
+            parsed = urlparse(db_url)
+            user = parsed.username or os.getenv('DB_USER')
+            password = parsed.password or os.getenv('DB_PASSWORD')
+            host = parsed.hostname
+            port = parsed.port or 3306
+            database = parsed.path.strip('/') if parsed.path else os.getenv('DB_NAME')
+            
+            connection = mysql.connector.connect(
+                host=host,
+                user=user,
+                password=password,
+                database=database,
+                port=port
+            )
+        else:
+            # Fallback to individual environment variables
+            connection = mysql.connector.connect(
+                host=os.getenv('DB_HOST'),
+                user=os.getenv('DB_USER'),
+                password=os.getenv('DB_PASSWORD'),
+                database=os.getenv('DB_NAME')
+            )
+        
         logger.info("Database connection successful")
         return connection
     except Error as e:
