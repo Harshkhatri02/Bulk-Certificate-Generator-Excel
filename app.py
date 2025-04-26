@@ -32,6 +32,7 @@ def create_connection():
     try:
         # Get the database URL from environment variable
         db_url = os.getenv('DB_HOST')
+        logger.info(f"DB_HOST value: {db_url}")
         
         if db_url and ('mysql://' in db_url or '@' in db_url):
             # Parse the URL if it's in the format mysql://user:pass@host:port/db
@@ -42,6 +43,7 @@ def create_connection():
             port = parsed.port or 3306
             # Use DB_NAME from environment with certificate-gen as fallback
             database = os.getenv('DB_NAME', 'certificate-gen')
+            logger.info(f"Using database name: {database}")
             
             connection = mysql.connector.connect(
                 host=host,
@@ -52,14 +54,16 @@ def create_connection():
             )
         else:
             # Fallback to individual environment variables
+            database = os.getenv('DB_NAME', 'certificate-gen')
+            logger.info(f"Using database name: {database}")
             connection = mysql.connector.connect(
                 host=os.getenv('DB_HOST'),
                 user=os.getenv('DB_USER'),
                 password=os.getenv('DB_PASSWORD'),
-                database=os.getenv('DB_NAME', 'certificate-gen')  # Use environment variable with fallback
+                database=database
             )
         
-        logger.info("Database connection successful")
+        logger.info(f"Database connection successful to database: {database}")
         return connection
     except Error as e:
         logger.error(f"Database connection failed: {e}")
