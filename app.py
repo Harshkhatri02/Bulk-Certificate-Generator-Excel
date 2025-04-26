@@ -9,18 +9,20 @@ from datetime import datetime
 import qrcode
 from werkzeug.security import generate_password_hash, check_password_hash
 from mysql.connector import Error
+from dotenv import load_dotenv
 
-
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Generate a random secret key
+app.secret_key = os.getenv('SECRET_KEY', os.urandom(24))  # Use environment variable for secret key
 
 def create_connection():
     connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='',  # Your MySQL password
-        database='certificateGen'  # The database you want to connect to
+        host=os.getenv('DB_HOST', 'localhost'),
+        user=os.getenv('DB_USER', 'root'),
+        password=os.getenv('DB_PASSWORD', ''),
+        database=os.getenv('DB_NAME', 'certificateGen')
     )
     return connection
 

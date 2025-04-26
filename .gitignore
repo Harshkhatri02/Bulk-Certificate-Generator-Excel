@@ -11,4 +11,6 @@ venv/
 certificates/
 outputs/
 certificates.zip
-data.xlsx 
+data.xlsx
+.env.local
+.env.*.local
