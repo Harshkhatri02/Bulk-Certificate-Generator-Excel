@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Certify Me! | Online Certification Generation</title>
+    <base href="/static/images/">
+    <link rel="shortcut icon" href="logo.jfif" type="image/x-icon">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> -->
+    <style>
+      /* H1 */
+
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&display=swap'); 
+      :root{
+        --var-background: linear-gradient(135deg, #333333, #777777, #aaaaaa,#9f9f9f,#333333 ) ;
+        --primary-color: #333;
+
+      }
+      a{
+        text-decoration: none;
+      }
+    *{
+      scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    -webkit-font-smoothing: antialiased;
+    
+    -moz-osx-font-smoothing: grayscale;
+    
+    font-smooth: always;
+  }
+  main h1{
+  font-family: 'Merriweather';
+  font-size: 2.5rem;
+  color: var(--primary-color);
+            text-align: center;
+}
+h2{
+  font-family: 'Merriweather';
+}
+li{
+  font-size:0.9rem;
+}
+p,li{
+  color: black;
+  font-family: 'Roboto Slab';
+  font-weight: 400;
+  /* font-feature-settings: "smcp"; */
+}
+html,body{
+  height: 100%;
+    width: 100%;
+  }
+  ::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 1rem;
+}
+
+
+/* Multicolor gradient text */
+h1 {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #333333;
+          scroll-behavior:smooth;
+      }
+h1 {
+  user-select: none;
+  background: linear-gradient(45deg, #e0e0e0, #f5f5f5, #c0c0c0, #e0e0e0);
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+}
+
+/* Shiny effect using text shadow */
+header h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+  transform: translateX(-50%) skewX(-20deg);
+    transition: 0.7s ease-in-out;
+}
+
+ h1:hover::before {
+   left: 99%;
+  }
+
+  /* Adding a softer shadow for better visibility */
+        .container{
+          cursor:default;
+        }
+        header{
+          color: aliceblue;
+          position: fixed;
+          top: 0;
+          z-index: +2;
+            background: #2c2c2e;
+            display: grid; 
+            border-bottom: #888 solid;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .logo-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        .logo-container img{
+          margin-right: 1rem;
+          border-radius: 50%;
+          height: 10vh;
+            width: 5vw;
+          }
+          
+          #nav{
+          display: flex;
+          /* grid-template-columns: 29vw 72vw; */
+          justify-content: space-around;
+          column-gap: 10vw;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+            width: 99vw;
+            height: 12vh;
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            box-shadow: none;
+            backdrop-filter: blur( 4px );
+            -webkit-backdrop-filter: blur( 4px );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            /* border: red solid; */
+            
+          }
+          #nav:hover{
+            box-shadow: 0 8px 32px 0 rgba(249, 249, 250, 0.37);
+        }
+        .list-container{
+            display: flex;
+            justify-content:space-around;
+            align-items: center;
+        }
+        .list-container ul{
+            display: flex;
+            list-style: none;
+          }
+        .list-container ul li {
+            user-select: none;
+    margin-right: 1rem;
+    border: rgba(255, 255, 255, 0.604) solid 2px;
+    padding: 0.7rem 2rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1.2px black solid;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-radius: 1rem;
+    
+    color: #fffffff9;
+    background-color: #C0C0C0;
+  }       
+  .list-container ul li:hover {
+    color: black;
+    background: linear-gradient(45deg, #e0e0e0, #f5f5f5, #c0c0c0, #e0e0e0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-3px); /* Slight lift on hover */
+  }
+  
+  /* Active state (when the button is clicked) */
+  .list-container ul li:active {
+
+    color:black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slightly reduced shadow */
+    transform: translateY(0); /* Button returns to original position */
+  }
+  
+  
+  @keyframes moveUp {
+    0%{
+                height: 5vh;
+              }
+              100%{
+                height: 1vh;
+            }
+          }
+          
+        main{
+            margin-top:5rem;   
+            z-index: -1;
+            width: 100%;
+            height:  100%;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            padding: 0% 5% 0% 5% ;
+          }
+          
+          .section{
+            margin-bottom: 0.5rem;
+            height: auto;
+            width: 100%;
+          }
+          /* New */
+          #section1{
+            height: 90vh;
+            min-height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:url(frame1.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+          }
+          .header-content {
+            text-align: center;
+            padding: 10vh 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin: 5vh auto;
+            max-width: 800px;
+            animation: fadeIn 2s ease-in-out;
+          }
+          
+          .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+          }
+          
+          .header-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #010101e9;
+          }
+          
+          .header-content .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+          }
+          .section2{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: auto auto;
+            column-gap:1vw;
+            height: auto;
+            width: 100%;
+          }
+        .text-container{
+          text-align: center;
+          backdrop-filter: blur( 4px );
+          -webkit-backdrop-filter: blur( 4px );
+          padding: 2rem;
+          display: grid;
+            justify-content: center;
+            align-items: center;
+            border-top-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background: linear-gradient(135deg, #333333, #777777, #aaaaaa,#9f9f9f,#333333 ) ;
+
+            /* background-repeat: no-repeat;
+            background-size: cover;
+            background-position:100%; */
+            box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+          }
+          #back{
+            background: rgba( 255, 255, 255, 0.25 );
+            padding: 1rem;
+            border-radius: 4rem;
+            row-gap: 1rem;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+          }
+          .image-contain{
+            height: 90vh;
+            width: 29vw;
+            background:url(frame\ \(2\).jfif);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .text-container h2{
+          font-size: 2rem;
+          color: var(--primary-color);
+        }
+        /* CSS */
+        .button-86 {
+            all: unset;
+            width: 100px;
+            height: 30px;
+            font-size: 15px;
+            background: transparent;
+            border: none;
+            position: relative;
+            color: #f0f0f0;
+            cursor: pointer;
+            z-index: 1;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+          }
+          
+          .button-86::after,
+          .button-86::before {
+            content: '';
+            position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all .4s;
+}
+
+.button-86::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #28282d;
+  border-radius: 10px;
+}
+
+.button-86::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.button-86:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+.button-86:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.button-86:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}
+
+.container-1 {
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #333333, #777777, #aaaaaa,#9f9f9f,#333333 ) ;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90vw;
+  width: 100%;
+  }
+  
+  .header-1 {
+    text-align: center;
+    padding: 2%;
+  }
+  .features-1 {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 1%;
+  }
+  .container-1 h1{
+    color: #28282d;
+  }
+  .feature-item-1 {
+    text-align: center;
+    padding:0.8rem;
+    background: rgba( 255, 255, 255, 0.25 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 30%;
+  }
+  .feature-item-1:hover img{
+    transform: scale(0.95);
+  }
+  .feature-item-1:hover{
+    border: black 0.5px solid;
+    cursor: pointer;
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+  }
+  .feature-item-1 h2{
+    /* font-size: medium; */
+    font-size: 1.1rem;
+  }
+  .feature-item-1 p{
+    font-size: small;
+  }
+  .feature-item-1 img {
+    transition: all 0.5s;
+    width: 100%;
+    height: auto;
+  }
+  .buttons-1 button{
+    padding: 0.5rem;
+  }
+  .buttons-1 {
+    width: 22%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+  .button-1 {
+    border: none;
+    cursor: pointer;
+  }
+  .footer {
+    text-align: center;
+  }
+
+/* News Letter Updates */
+.section3{
+  width: 100%;
+  /* opacity: 0; */
+  margin: auto;
+  padding: 1.5rem 1rem 1rem;
+  background: linear-gradient(135deg, #777777, #aaaaaa,#333333,#9f9f9f,#424242 );
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   animation: fadeIn 1s ease-in-out; 
+  /* transition: opacity 1s ease-in-out; */
+}
+.section3 .visible{
+  opacity: 1;
+}
+  .container-for-updates {
+    background: rgba( 255, 255, 255, 0.25 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  
+  }
+
+  .section-for-updates {
+border-radius: 10px;
+    text-align: center;
+    padding-top: 5vh;
+  }
+
+  .section-for-updates h1 {
+    color: #28282d;
+    font-size: 2rem;
+    /* margin-bottom: 1rem; */
+  }
+
+  .section-for-updates p {
+    margin-bottom: 3rem;
+  }
+  
+  .newsletter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .newsletter input[type="email"] {
+    width: 40%;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+  }
+
+  .newsletter button {
+    padding: 0.75rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .newsletter button:hover {
+    background-color: #333;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  
+  .footer .logo {
+    width: 18%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+    align-items: center ;
+  }
+  .logo img{
+    border-radius: 50%;
+    height: 10vh;
+    width:5vw;
+  }
+
+  .footer nav {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer nav a {
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s ease;
+  }
+
+  .footer nav a:hover {
+    color: #555;
+  }
+
+  .footer .social-icons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer .social-icons a {
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s ease;
+  }
+
+  .footer .social-icons a:hover {
+    color: #555;
+  }
+
+
+  @media (max-width: 768px) {
+    .newsletter input[type="email"] {
+      width: 60%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter input[type="email"] {
+      width: 80%;
+    }
+
+    .footer {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer nav {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer .social-icons {
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .features {
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature-item {
+      width: 80%;
+      margin-bottom: 4%;
+    }
+    .buttons button {
+      margin-bottom: 2%;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-content h1 {
+      font-size: 2rem;
+    }
+
+    .header-content p {
+      font-size: 1rem;
+    }
+
+    .header-content .buttons a {
+      padding: 0.6rem 1.5rem;
+    }
+  }
+  /* url(Luxury\ Frame\ Template.jfif)no-repeat center/cover; */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div id="nav">
+                <div class="logo-container">
+                    <img src="logo.jfif" alt="" srcset="">
+                    <h1>Certify Me</h1>
+                </div>
+                <div class="list-container">
+                  <ul>
+                    <a href="/home"><li>Home</li></a>
+                    <a href="/tools"><li>Tools</li></a>
+                    <a href="/about_us"><li>About Us</li></a>
+                    <a href="/our_services"><li>Our Services</li></a>
+                    {% if user %}
+                        <a href="/logout"><li>Logout</li></a>
+                    {% else %}
+                        <a href="/signupAndLogin"><li>SignUp/Login</li></a>
+                    {% endif %}
+                </ul>
+                </div>
+            </div>
+           
+        </header>
+        <main>
+          <div class="contain">
+            <section class="section" id="section1">
+              <div class="header-content">
+                <h1>Create Professional Certificates in Minutes</h1>
+                <p>Effortlessly generate customized certificates for any occasion.</p>
+                <div class="buttons">
+                      <a href="#scroll" class="button-86" id="learnMoreButton">Learn More</a>
+                      <a href="#" class="button-86">Sign Up</a>
+                    </div>
+                  </section>
+            <section class="section section2" id="scroll">
+    
+              <div class="text-container">
+                <div id="back">
+                  <h2>Your Partner in Certificate Creation</h2>
+                  <div class="content">
+    
+                    <p>
+                      At <b>Certify Me</b>, we are passionate about empowering individuals and organizations to achieve their goals through the power of recognition. Our user-friendly platform provides a seamless way to create and distribute personalized certificates that celebrate accomplishments and motivate individuals to strive for excellence.
+    
+                      With a commitment to innovation, quality, customer satisfaction, we have developed a suite of features designed to make certificate generation effortless. Our platform offers a vast library of customizable templates, drag-and-drop functionality, and instant delivery options.
+                      </p>
+                      <p>
+                      Whether you're a teacher looking to honor your students, a corporate trainer recognizing employee achievements, or an individual wanting to commemorate a special occasion, our platform has everything you need to create stunning certificates that leave a lasting impression. Join us in celebrating successes and making a difference.
+                    </p>
+                    <p>
+                      Experience the future of certificate creation with <b>Certify Me</b>. Let's elevate your recognition efforts together!
+                    </p>
+                  </div>
+    
+                      <!-- HTML !-->
+                       <div style="display:flex;justify-content: center;align-items: center;">
+    
+                           <button class="button-86" role="button">Let's Get Started !</button>
+                       </div>
+    
+                </div>
+              </div>
+              <div class="image-contain"></div>
+            </section>
+                  <section class="section" >
+                <div class="container-1">
+                         <div class="header-1" >
+                           <h1>Effortless Certificate Generation</h1>
+                           <p>Simplified service makes it easy to create your certificates.</p>
+                         </div>
+                         <div class="features-1">
+                           <div class="feature-item-1">
+                             <img src="cert2.jfif" alt="User-Friendly Interface">
+                             <h2>User-Friendly Interface</h2>
+                             <p>Our user-friendly platform simplifies certificate creation. With intuitive navigation, customizable templates, and real-time previews, you can design professional certificates effortlessly. Experience the future of online certification.</p>
+                           </div>
+                           <div class="feature-item-1">
+                             <img src="cert1.jfif" alt="Instant Certificate Delivery">
+                             <h2>Instant Certificate Delivery</h2>
+                             <p>With our instant delivery feature, you can download or share your certificates immediately after creating them. This saves you time and ensures that your recipients can access their certificates promptly.</p>
+                           </div>
+                           <div class="feature-item-1">
+                             <img src="cert4.jfif" alt="All Your Needs">
+                             <h2>All Your Needs</h2>
+                             <p>From simple certificates to complex diplomas, our platform offers a wide range of features to cater to your specific requirements. Whether you're an individual, a small business, or a large institution, we have the tools you need to create professional-looking certificates with ease.</p>
+                           </div>
+                         </div>
+                         <div class="buttons-1">
+                           <button class="button-86" role="button">Learn More</button>
+                           <button class="button-86">Sign Up</button>
+                         </div>
+                         <!-- <div class="footer">
+                         </div> -->
+                       </div>
+                
+              </section>
+
+              <section class="section section3">
+
+                <div class="container-for-updates">
+                  <div class="section-for-updates">
+                    <h1>Get Updates and Tips Here</h1>
+                    <p>Stay informed with our latest news and helpful tips.</p>
+                  </div>
+                  <form class="newsletter" 
+      style="padding-bottom: 1rem; border-bottom: 0.5px solid silver;" 
+      action="/submit_update" method="POST">
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <button type="submit">Get Updates!</button>
+</form>
+
+                  <!-- <form class="newsletter" style="padding-bottom: 1rem;border-bottom: 0.5px solid silver;">
+                    <input type="email" placeholder="Enter your email">
+                    <button>Get Updates!</button>
+                  </form> -->
+                  <div class="footer">
+                    <div class="logo"> <img src="logo.jfif" alt="">Certify Me</div>
+                    <nav>
+                      <a href="#">About Us</a>
+                      <a href="#">Contact Us</a>
+                      <a href="#">FAQs</a>
+                      <a href="#">Support</a>
+                      <a href="#">Blog</a>
+                    </nav>
+                    <div class="social-icons">
+                      <a href="#">Facebook</a>
+                      <a href="#">Twitter</a>
+                      <a href="#">Instagram</a>
+                      <a href="#">YouTube</a>
+                      <a href="#">LinkedIn</a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            
+            <!-- Next -->
+            </main>
+        <footer>
+
+        </footer>
+    </div>
+  <script>
+    document.getElementById('learnMoreButton').addEventListener('click', function(e) {
+    e.preventDefault();  // Prevent the default link behavior
+    const targetSection = document.getElementById('scroll');
+    const sectionTop = targetSection.offsetTop;
+
+    // Adjust scroll position to match the start of the section
+    const headerHeight = 80;  // Set the height of your fixed header
+window.scrollTo({
+    top: sectionTop - headerHeight,
+    behavior: 'smooth'
+});
+
+});
+
+  </script>    
+</body>
+</html>

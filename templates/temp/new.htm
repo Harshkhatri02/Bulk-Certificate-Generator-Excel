@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certify Me - Comprehensive Certification Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&display=swap'); 
+        :root {
+            --var-background: linear-gradient(135deg, #333333, #777777, #aaaaaa, #9f9f9f, #333333);
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #c0c0c0;
+            --text-color: #333;
+            --background-color: #f5f5f5;
+            --card-bg-col: rgba(255, 255, 255, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-smooth: always;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto Slab', serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: #2c2c2e;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            margin-right: 1rem;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+        }
+
+        .list-container ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .list-container ul li {
+            margin-left: 2rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .list-container ul li:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            padding-top: 80px; /* Adjusted to account for fixed header */
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--secondary-color);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: var(--card-bg-col);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #a0a0a0;
+            transform: scale(1.05);
+        }
+
+        .features {
+            background: var(--card-bg-col);
+            border-radius: 1rem;
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+
+        .feature-text {
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .testimonials {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg-col);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            text-align: center;
+            background: var(--card-bg-col);
+            border-radius: 1rem;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            background-image: url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .service-card, .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .features, .cta-section {
+                padding: 2rem;
+            }
+
+            .list-container ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .list-container ul li {
+                margin: 0.5rem 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="nav">
+            <div class="logo-container">
+                <img src="/api/placeholder/50/50" alt="Certify Me Logo">
+                <h1>Certify Me</h1>
+            </div>
+            <div class="list-container">
+                <ul>
+                    <li>Home</li>
+                    <li>Tools</li>
+                    <li>About Us</li>
+                    <li>Our Services</li>
+                    <li>SignUp/Login</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="animate-fadeInUp header">
+            <h1>Our Comprehensive Services</h1>
+            <p class="subtitle">Elevate Your Certifications with Cutting-Edge Solutions</p>
+        </div>
+        
+        <section class="services">
+            <div class="service-card animate-fadeInUp">
+                <img src="/api/placeholder/300/200" alt="Custom Certificate Design">
+                <h2>Custom Certificate Design</h2>
+                <p>Create stunning, unique certificates that reflect your brand's identity and professionalism.</p>
+                <a href="#" class="cta-button">Explore Designs</a>
+            </div>
+            <div class="service-card animate-fadeInUp">
+                <img src="/api/placeholder/300/200" alt="Bulk Generation">
+                <h2>Bulk Generation</h2>
+                <p>Effortlessly produce thousands of personalized certificates in minutes with our advanced system.</p>
+                <a href="#" class="cta-button">Learn More</a>
+            </div>
+            <div class="service-card animate-fadeInUp">
+                <img src="/api/placeholder/300/200" alt="Secure Verification">
+                <h2>Secure Verification</h2>
+                <p>Ensure certificate authenticity with our robust online verification portal and blockchain technology.</p>
+                <a href="#" class="cta-button">Verify Now</a>
+            </div>
+            <div class="service-card animate-fadeInUp">
+                <img src="/api/placeholder/300/200" alt="API Integration">
+                <h2>API Integration</h2>
+                <p>Seamlessly incorporate our certificate generation service into your existing software ecosystem.</p>
+                <a href="#" class="cta-button">View API Docs</a>
+            </div>
+        </section>
+
+        <section class="features animate-fadeInUp">
+            <h2>Why Choose Our Service?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="feature-icon fas fa-tachometer-alt"></i>
+                    <span class="feature-text">Lightning-fast processing</span>
+                </div>
+                <div class="feature-item">
+                    <i class="feature-icon fas fa-lock"></i>
+                    <span class="feature-text">Bank-grade security</span>
+                </div>
+                <div class="feature-item">
+                    <i class="feature-icon fas fa-magic"></i>
+                    <span class="feature-text">Easy-to-use interface</span>
+                </div>
+                <div class="feature-item">
+                    <i class="feature-icon fas fa-cloud"></i>
+                    <span class="feature-text">Cloud-based solution</span>
+                </div>
+                <div class="feature-item">
+                    <i class="feature-icon fas fa-headset"></i>
+                    <span class="feature-text">24/7 customer support</span>
+                </div>
+                <div class="feature-item">
+                    <i class="feature-icon fas fa-chart-line"></i>
+                    <span class="feature-text">Detailed analytics</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials animate-fadeInUp">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <img src="/api/placeholder/80/80" alt="Sarah Johnson">
+                    <p class="testimonial-text">"This service has revolutionized our certification process. We've saved countless hours and improved our professional image."</p>
+                    <p class="testimonial-author">- Sarah Johnson, CEO of TechEd Inc.</p>
+                </div>
+                <div class="testimonial-card">
+                    <img src="/api/placeholder/80/80" alt="Mark Thompson">
+                    <p class="testimonial-text">"The API integration was seamless, and the support team was incredibly helpful throughout the process."</p>
+                    <p class="testimonial-author">- Mark Thompson, CTO of CertifyPro</p>
+                </div>
+                <div class="testimonial-card">
+                    <img src="/api/placeholder/80/80" alt="Emily Chen">
+                    <p class="testimonial-text">"We've received numerous compliments on our certificate designs. This service has truly exceeded our expectations."</p>
+                    <p class="testimon

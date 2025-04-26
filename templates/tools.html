@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certify Me - Comprehensive Certification Services</title>
+    <base href="/static/images/">
+    <link rel="shortcut icon" href="logo.jfif" type="image/x-icon">
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&display=swap'); 
+        :root {
+            --var-background: linear-gradient(135deg, #333333, #777777, #aaaaaa, #9f9f9f, #333333);
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #c0c0c0;
+            --text-color: #333;
+            --background-color: #f5f5f5;
+            --card-bg-col: rgba(255, 255, 255, 0.9);
+            --background-header: #2c2c2e;
+            --background-body: #333333;
+            --background-nav: rgba(255, 255, 255, 0.1);
+--background-li: #C0C0C0;
+--background-head-content: rgba(255, 255, 255, 0.2);
+--background-text-container: linear-gradient(135deg, #333333, #777777, #aaaaaa,#9f9f9f,#333333 ) ;
+--background-transperant: rgba( 255, 255, 255, 0.25 );
+--h1-color:#28282d;
+}
+
+*{
+      scroll-behavior: smooth;
+      margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    -webkit-font-smoothing: antialiased;
+    
+    -moz-osx-font-smoothing: grayscale;
+    
+    font-smooth: always;
+}
+  a{
+    text-decoration: none;
+}
+h1{
+    font-family: 'Playfair';
+  background-color: var(--h1-color);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+h2{
+    font-family: 'Merriweather';
+}
+li{
+    font-size:0.9rem;
+}
+p,li{
+    color: black;
+    font-family: 'Roboto Slab';
+    font-weight: 400;
+    /* font-feature-settings: "smcp"; */
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+::-webkit-scrollbar {
+      width: 0.7rem;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 1rem;
+    }
+    body {
+        /* font-family: 'Roboto Slab', serif; */
+        line-height: 1.6;
+        color: var(--text-color);
+        /* background: var(--background-color); */
+        background: url('frame1.jpg') no-repeat center center fixed;
+        background-size: cover;
+        /* background: var(--background-body); */
+    /* background-color: #f0f0f0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    }
+    .container {
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        height: 100%; /* Ensure it takes full height */
+    }
+    .container label{
+        font-size: 1.3rem;
+    }
+    .container select{
+        background-color: #d4d4d4;
+        user-select: white;
+    }
+    select option {
+    background-color: #ffffff; /* Light gray background */
+}
+
+select option:checked {
+    color: rgb(0, 0, 0);
+}
+
+/* For hover effect (not supported in all browsers) */
+select option:hover {
+    background-color: #616161;
+}
+    header h1 {
+        user-select: none;
+        background: linear-gradient(45deg, #e0e0e0, #f5f5f5, #c0c0c0, #e0e0e0);
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+}
+.container h1{
+    user-select: none;
+        background: linear-gradient(45deg, #212121, #000000, #323232, #1d1d1d);
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  position: relative;
+  padding: 10px;
+}
+
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="file"],
+input[type="text"],
+select {
+    width: 100%; /* Full width */
+    max-width: 100%; /* Prevent overflow */
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%; /* Full width */
+    max-width: 100%; /* Prevent overflow */
+    padding: 12px;
+    background-color: var(--background-body);
+    color: white;
+    border: none;
+    border: 0.3px solid rgb(162, 162, 162);  
+
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Adjusted margin */
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: rgb(33, 33, 33);
+}
+
+.single-certificate-fields {
+    margin-bottom: 20px;
+}
+
+.single-certificate-fields .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.single-certificate-fields input[type="text"] {
+    width: calc(100% - 22px); /* Adjust width to align with delete button width */
+    margin-bottom: 10px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.delete-btn {
+    /* background-color: #dc3545; */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 12px;
+    width: 100%; /* Full width to match input field */
+    margin-top: 10px; /* Space above the button */
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.add-field-btn {
+    background-color: var(--background-body);
+    margin-bottom: 10px;
+    transition: background-color 0.1s ease;
+}
+
+.add-field-btn:hover {
+    background-color: var(--background-body);
+}
+
+/* Shiny effect using text shadow */
+header h1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+  transform: translateX(-50%) skewX(-20deg);
+    transition: 0.7s ease-in-out;
+}
+
+ h1:hover::before {
+   left: 99%;
+  }
+        .container {
+            margin-top: 3rem;
+            background: var(--background-text-container);
+            width: 90% auto;
+            max-width: 1400px;
+            /* margin: 0 auto; */
+            padding: 2rem;
+        }
+
+        header{
+          color: aliceblue;
+          position: fixed;
+          top: 0;
+          z-index: +2;
+            background: #2c2c2e;
+            display: grid; 
+            border-bottom: #888 solid;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .logo-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        .logo-container img{
+          margin-right: 1rem;
+          border-radius: 50%;
+          height: 10vh;
+            width: 5vw;
+          }
+          
+          #nav{
+          display: flex;
+          /* grid-template-columns: 29vw 72vw; */
+          justify-content: space-around;
+          column-gap: 10vw;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+            width: 99vw;
+            height: 12vh;
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            box-shadow: none;
+            backdrop-filter: blur( 4px );
+            -webkit-backdrop-filter: blur( 4px );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            /* border: red solid; */
+            
+          }
+          #nav:hover{
+            box-shadow: 0 8px 32px 0 rgba(249, 249, 250, 0.37);
+        }
+        .list-container{
+            display: flex;
+            justify-content:space-around;
+            align-items: center;
+        }
+        .list-container ul{
+            display: flex;
+            list-style: none;
+          }
+        .list-container ul li {
+            user-select: none;
+    margin-right: 1rem;
+    border: rgba(255, 255, 255, 0.604) solid 2px;
+    padding: 0.7rem 2rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1.2px black solid;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    border-radius: 1rem;
+    
+    color: #fffffff9;
+    background-color: #C0C0C0;
+  }       
+  .list-container ul li:hover {
+    color: black;
+    background: linear-gradient(45deg, #e0e0e0, #f5f5f5, #c0c0c0, #e0e0e0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-3px); /* Slight lift on hover */
+  }
+  
+  /* Active state (when the button is clicked) */
+  .list-container ul li:active {
+
+    color:black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slightly reduced shadow */
+    transform: translateY(0); /* Button returns to original position */
+  }
+  
+  
+  @keyframes moveUp {
+    0%{
+                height: 5vh;
+              }
+              100%{
+                height: 1vh;
+            }
+          }
+          
+        .header{
+            margin-top:12vh ;
+        }
+
+
+        /* main h2{
+            color: #28282d;    font-size: 2.5rem;
+            color: var(--primary-color);
+            text-align: center;
+        } */
+
+</style>
+</head>
+<body>
+        <header>
+            <div id="nav">
+            <div class="logo-container">
+                <img src="logo.jfif" alt="" srcset="">
+                <h1>Certify Me</h1>
+            </div>
+            <div class="list-container">
+                <ul>
+                    <a href="/home"><li>Home</li></a>
+                    <a href="/tools"><li>Tools</li></a>
+                    <a href="/about_us"><li>About Us</li></a>
+                    <a href="/our_services"><li>Our Services</li></a>
+                    {% if user %}
+                        <a href="/logout"><li>Logout</li></a>
+                    {% else %}
+                        <a href="/signupAndLogin"><li>SignUp/Login</li></a>
+                    {% endif %}
+                </ul>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <h1>Certificate Generator</h1>
+                <form action="/tools" method="post" enctype="multipart/form-data">
+                    <label for="template">Upload Certificate Template</label>
+                    <input type="file" name="template" id="template" required>
+        
+                    <label for="download_option">Select Generation Option</label>
+                    <select name="download_option" id="download_option" required>
+                        <option value="single">Single Certificate</option>
+                        <option value="zip">Generate Zip for Multiple Certificates</option>
+                    </select>
+        
+                    <div id="single-certificate-fields" class="single-certificate-fields">
+                        <!-- Dynamic fields will be generated here for single certificate -->
+                    </div>
+        
+                    <label for="qr_code_url">QR Code URL</label>
+                    <input type="text" name="qr_code_url" id="qr_code_url" placeholder="Enter QR Code URL">
+        
+                    <label for="excel_file" id="excel_file_label" style="display:none;">Upload Excel File (for multiple certificates)</label>
+                    <input type="file" name="excel_file" id="excel_file" style="display:none;">
+        
+                    <button type="submit">Next</button>
+                </form>
+                <!-- <form action="/tools" method="post" enctype="multipart/form-data">
+                    <label for="template">Upload Certificate Template</label>
+                    <input type="file" name="template" id="template" required>
+        
+                    <label for="download_option">Select Generation Option</label>
+                    <select name="download_option" id="download_option" required>
+                        <option value="single">Single Certificate</option>
+                        <option value="zip">Generate Zip for Multiple Certificates</option>
+                    </select>
+        
+                    <div id="single-certificate-fields" class="single-certificate-fields">
+                    </div>
+        
+                    <label for="excel_file" id="excel_file_label" style="display:none;">Upload Excel File (for multiple certificates)</label>
+                    <input type="file" name="excel_file" id="excel_file" style="display:none;">
+        
+                    <button type="submit">Next</button>
+                </form> -->
+            </div>
+        </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+        <script>
+            // Change the form UI based on the user selection
+            document.getElementById('download_option').addEventListener('change', function () {
+                const option = this.value;
+                const singleFields = document.getElementById('single-certificate-fields');
+                const excelFileLabel = document.getElementById('excel_file_label');
+                const excelFileInput = document.getElementById('excel_file');
+    
+                if (option === 'single') {
+                    singleFields.style.display = 'block';
+                    excelFileLabel.style.display = 'none';
+                    excelFileInput.style.display = 'none';
+    
+                    // Clear existing fields
+                    singleFields.innerHTML = '';
+    
+                    // Add button to dynamically add more fields
+                    const addFieldBtn = document.createElement('button');
+                    addFieldBtn.className = 'add-field-btn';
+                    addFieldBtn.innerText = 'Add More Fields';
+                    addFieldBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+    
+                        const div = document.createElement('div');
+                        div.className = 'input-container';
+                        div.innerHTML = `
+                            <label>Additional Field</label>
+                            <input type="text" name="field_name_${Date.now()}" placeholder="Enter field name">
+                            <button class="delete-btn">Delete</button>
+                        `;
+                        div.querySelector('.delete-btn').addEventListener('click', function () {
+                            div.remove();
+                        });
+                        singleFields.appendChild(div);
+                    });
+    
+                    singleFields.appendChild(addFieldBtn);
+    
+                } else if (option === 'zip') {
+                    singleFields.style.display = 'none';
+                    excelFileLabel.style.display = 'block';
+                    excelFileInput.style.display = 'block';
+    
+                    // Remove existing dynamic fields and button for the single option
+                    singleFields.innerHTML = '';
+                }
+            });
+    
+            // Initialize the form based on the current selection on page load
+            window.addEventListener('load', function() {
+                const currentOption = document.getElementById('download_option').value;
+                const singleFields = document.getElementById('single-certificate-fields');
+                const excelFileLabel = document.getElementById('excel_file_label');
+                const excelFileInput = document.getElementById('excel_file');
+    
+                if (currentOption === 'single') {
+                    singleFields.style.display = 'block';
+                    excelFileLabel.style.display = 'none';
+                    excelFileInput.style.display = 'none';
+    
+                    // Add button to dynamically add more fields
+                    const addFieldBtn = document.createElement('button');
+                    addFieldBtn.className = 'add-field-btn';
+                    addFieldBtn.innerText = 'Add More Fields';
+                    addFieldBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+    
+                        const div = document.createElement('div');
+                        div.className = 'input-container';
+                        div.innerHTML = `
+                            <label>Additional Field</label>
+                            <input type="text" name="field_name_${Date.now()}" placeholder="Enter field name">
+                            <button class="delete-btn">Delete</button>
+                        `;
+                        div.querySelector('.delete-btn').addEventListener('click', function () {
+                            div.remove();
+                        });
+                        singleFields.appendChild(div);
+                    });
+    
+                    singleFields.appendChild(addFieldBtn);
+    
+                } else {
+                    singleFields.style.display = 'none';
+                    excelFileLabel.style.display = 'block';
+                    excelFileInput.style.display = 'block';
+                }
+            });
+    
+            // Before submitting the form, replace the field names with user input
+            document.querySelector('form').addEventListener('submit', function() {
+                document.querySelectorAll('.input-container').forEach(container => {
+                    const input = container.querySelector('input[type="text"]');
+                    const fieldName = input.value.trim();
+                    if (fieldName) {
+                        input.name = `field_name_${fieldName}`;
+                    }
+                });
+            });
+        </script>
+    
+        <!-- <script>
+        document.getElementById('download_option').addEventListener('change', function () {
+            const option = this.value;
+            const singleFields = document.getElementById('single-certificate-fields');
+            const excelFileLabel = document.getElementById('excel_file_label');
+            const excelFileInput = document.getElementById('excel_file');
+    
+            if (option === 'single') {
+                singleFields.style.display = 'block';
+                excelFileLabel.style.display = 'none';
+                excelFileInput.style.display = 'none';
+    
+                // Clear existing fields
+                singleFields.innerHTML = '';
+    
+                // Add button to dynamically add more fields
+                const addFieldBtn = document.createElement('button');
+                addFieldBtn.className = 'add-field-btn';
+                addFieldBtn.innerText = 'Add More Fields';
+                addFieldBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+    
+                    const div = document.createElement('div');
+                    div.className = 'input-container';
+                    div.innerHTML = `
+                        <label>Additional Field</label>
+                        <input type="text" name="field_name_${Date.now()}" placeholder="Enter field name">
+                        <button class="delete-btn">Delete</button>
+                    `;
+                    div.querySelector('.delete-btn').addEventListener('click', function () {
+                        div.remove();
+                    });
+                    singleFields.appendChild(div);
+                });
+    
+                singleFields.appendChild(addFieldBtn);
+    
+            } else if (option === 'zip') {
+                singleFields.style.display = 'none';
+                excelFileLabel.style.display = 'block';
+                excelFileInput.style.display = 'block';
+    
+                // Remove existing dynamic fields and button for the single option
+                singleFields.innerHTML = '';
+            }
+        });
+    
+        // Initialize the form based on the current selection on page load
+        window.addEventListener('load', function() {
+            const currentOption = document.getElementById('download_option').value;
+            const singleFields = document.getElementById('single-certificate-fields');
+            const excelFileLabel = document.getElementById('excel_file_label');
+            const excelFileInput = document.getElementById('excel_file');
+    
+            if (currentOption === 'single') {
+                singleFields.style.display = 'block';
+                excelFileLabel.style.display = 'none';
+                excelFileInput.style.display = 'none';
+    
+                // Add button to dynamically add more fields
+                const addFieldBtn = document.createElement('button');
+                addFieldBtn.className = 'add-field-btn';
+                addFieldBtn.innerText = 'Add More Fields';
+                addFieldBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+    
+                    const div = document.createElement('div');
+                    div.className = 'input-container';
+                    div.innerHTML = `
+                        <label>Additional Field</label>
+                        <input type="text" name="field_name_${Date.now()}" placeholder="Enter field name">
+                        <button class="delete-btn">Delete</button>
+                    `;
+                    div.querySelector('.delete-btn').addEventListener('click', function () {
+                        div.remove();
+                    });
+                    singleFields.appendChild(div);
+                });
+    
+                singleFields.appendChild(addFieldBtn);
+    
+            } else {
+                singleFields.style.display = 'none';
+                excelFileLabel.style.display = 'block';
+                excelFileInput.style.display = 'block';
+            }
+        });
+    
+        // Before submitting the form, replace the field names with user input
+        document.querySelector('form').addEventListener('submit', function() {
+            document.querySelectorAll('.input-container').forEach(container => {
+                const input = container.querySelector('input[type="text"]');
+                const fieldName = input.value.trim();
+                if (fieldName) {
+                    input.name = `field_name_${fieldName}`;
+                }
+            });
+        });
+
+
+
+     
+    </script> -->
+</body>
+</html>
+

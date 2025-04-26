@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certify Me - Comprehensive Certification Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&display=swap'); 
+        :root {
+            --var-background: linear-gradient(135deg, #333333, #777777, #aaaaaa, #9f9f9f, #333333);
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #c0c0c0;
+            --text-color: #333;
+            --background-color: #f5f5f5;
+            --card-bg-col: rgba(255, 255, 255, 0.9);
+            --background-header: #2c2c2e;
+            --background-body: #333333;
+            --background-nav: rgba(255, 255, 255, 0.1);
+            --background-li: #C0C0C0;
+            --background-head-content: rgba(255, 255, 255, 0.2);
+            --background-text-container: linear-gradient(135deg, #333333, #777777, #aaaaaa,#9f9f9f,#333333);
+            --background-transperant: rgba( 255, 255, 255, 0.25 );
+            --h1-color:#28282d;
+        }
+        
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-smooth: always;
+        }
+        a {
+            text-decoration: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+        p, li {
+            font-family: 'Roboto Slab', sans-serif;
+            color: var(--text-color);
+        }
+        body {
+            line-height: 1.6;
+            background: var(--background-body);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            background: var(--background-header);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: var(--background-nav);
+            backdrop-filter: blur(4px);
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .list-container ul {
+            display: flex;
+            list-style: none;
+        }
+        .list-container ul li {
+            margin-left: 2rem;
+        }
+        .list-container ul li a {
+            color: var(--accent-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .list-container ul li a:hover {
+            color: white;
+        }
+        main {
+            margin-top: 80px;
+        }
+        .hero {
+            background: var(--var-background);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: white;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+        }
+        .features, .how-it-works, .testimonials, .pricing, .faq {
+            padding: 4rem 0;
+            background-color: var(--background-color);
+        }
+        .features h3, .how-it-works h3, .testimonials h3, .pricing h3, .faq h3 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .feature-grid, .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card, .pricing-card {
+            background: var(--card-bg-col);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover, .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .feature-card h4, .pricing-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .how-it-works-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .step {
+            text-align: center;
+            width: 200px;
+        }
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: var(--card-bg-col);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        .pricing-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .pricing-card ul li {
+            margin-bottom: 0.5rem;
+        }
+        .pricing-card .price {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .faq-answer {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0 0 5px 5px;
+            display: none;
+        }
+        footer {
+            background-color: var(--background-header);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .social-links {
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+        @media (max-width: 768px) {
+            #nav {
+                flex-direction: column;
+            }
+            .list-container {
+                margin-top: 1rem;
+            }
+            .list-container ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .list-container ul li {
+                margin: 0.5rem 0;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="nav">
+            <div class="logo-container">
+                <img src="logo.jfif" alt="Certify Me Logo">
+                <h1>Certify Me</h1>
+            </div>
+            <div class="list-container">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Professional Certification Made Easy</h2>
+                <p>Create, manage, and verify certificates for your organization or event with just a few clicks. Our comprehensive platform streamlines the entire certification process, saving you time and resources.</p>
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h3>Our Features</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Custom Design</h4>
+                        <p>Create unique certificate designs that match your brand and event style with our intuitive design tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Bulk Generation</h4>
+                        <p>Generate hundreds of certificates in seconds with our efficient bulk processing system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Digital Verification</h4>
+                        <p>Ensure the authenticity of your certificates with our secure digital verification system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Cloud Storage</h4>
+                        <p>Access and manage your certificates from anywhere, anytime with our reliable cloud storage solution.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Analytics Dashboard</h4>
+                        <p>Gain insights into your certification programs with our comprehensive analytics dashboard.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>API Integration</h4>
+                        <p>Seamlessly integrate our certification system into your existing workflows with our robust API.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h3>How It Works</h3>
+                <div class="how-it-works-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Create Template</h4>
+                        <p>Design your certificate template using our user-friendly interface.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Upload Data</h4>
+                        <p>Import recipient data via CSV or connect to your database.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Generate Certificates</h4>
+                        <p>Our system automatically generates certificates for all recipients.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Distribute & Verify</h4>
+                        <p>Send certificates to recipients and enable easy online verification.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h3>What Our Clients Say</h3>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <img src="/api/placeholder/80/80" alt="Jane Doe">
+                        <h4>Jane Doe</h4>
+                        <p>"Certify Me has revolutionized our certification process. We've saved countless hours and improved the quality of our certificates."</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="/api/placeholder/80/80" alt="John Smith">
+                        <h4>John Smith</h4>
+                        <p>"The digital verification feature has added a new level of credibility to our training programs. Highly recommended!"</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <img src="/api/placeholder/80/80" alt="Emma Wilson">
+                        <h4>Emma Wilson</h4>
+                        <p>"The customer support team at Certify Me is exceptional. They've been incredibly helpful throughout our implementation."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <h3>Pricing Plans</h3>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h4>Basic</h4>
+                        <p class="price">$29/month</p>
+                        <ul>
+                            <li>Up to 100 certificates/month</li>
+                            <li>5 custom templates</li>
+                            <li>Basic analytics</li>
+                            <li>Email support</li>
+                        </ul>
+                        <a href="#" class="cta-button">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Pro</h4>
+                        <p class="price">$79/month</p>
+                        <ul>
+                            <li>Up to 1000 certificates/month</li>
+                            <li>20 custom templates</li>
+                            <li>Advanced analytics</li>
+                            <li>Priority email support</li>
+                            <li>API access</li>
+                        </ul>
+                        <a href="#" class="cta-button">Choose Plan</a>
+                    </div>
+                    <div class="pricing-card">
+                        <h4>Enterprise</h4>
+                        <p class="price">Custom</p>
+                        <ul>
+                            <li>Unlimited certificates</li>
+                            <li>Unlimited custom templates</li>
+                            <li>Custom analytics</li>
+                            <li>24/7 phone support</li>
+                            <li>Full API access</li>
+                            <li>Dedicated account manager</li>
+                        </ul>
+                        <a href="#" class="cta-button">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <div class="container">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">How secure are the digital certificates?</div>
+                        <div class="faq-answer">Our digital certificates use advanced encryption and blockchain technology to ensure maximum security and authenticity.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Can I integrate Certify Me with my existing systems?</div>
+                        <div class="faq-answer">Yes, our API allows for seamless integration with most existing systems and workflows.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How long does it take to set up?</div>
+                        <div class="faq-answer">Most users can set up their first certificate template and start issuing certificates within an hour of signing up.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Do you offer custom branding options?</div>
+                        <div class="faq-answer">Absolutely! Our platform allows for full customization of certificate designs to match your brand identity.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Certify Me. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html>

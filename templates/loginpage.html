@@ -1,0 +1,124 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/static/images/">
+
+    <link rel="shortcut icon" href="logo.jfif" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginpage.css') }}" />
+
+    <title>Sign in & Sign up Form</title>
+    
+  </head>
+
+  <body>
+    <header>
+      <div id="nav">
+      <div class="logo-container">
+          <img src="logo.jfif" alt="" srcset="">
+          <h1>Certify Me</h1>
+      </div>
+      <div class="list-container">
+          <ul>
+            <a href="/home"><li>Home</li></a>
+            <a href="/tools">
+
+              <li>Tools</li>
+            </a>
+            <a href="/about_us">
+                <li>About Us</li>
+            </a>
+            <a href="/our_services">
+                <li>Our Services</li>
+            </a>
+            <a href="/signupAndLogin">
+                <li>SignUp/Login</li>
+            </a>
+              </ul>
+          </div>
+      </div>
+  </header>
+    <div class="container">
+    <div class="forms-container">
+      <div class="signin-signup">
+         <!-- Display flash messages -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages" style="display: flex; justify-content: center;">
+          {% for message in messages %}
+            <p style="color: rgb(255, 255, 255);font-weight: 400;font-size: 1.1rem;">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="/signupAndLogin" class="sign-in-form" method="post">
+      <h2 class="title">Sign in</h2>
+      <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="email" placeholder="Email" name="luname" required />
+      </div>
+      <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" name="lpass" required />
+      </div>
+      <input class="btn solid" type="submit" value="Login" name="action" />
+      <!-- ... (keep the rest of the sign-in form) ... -->
+    </form>
+  
+    <form action="/signupAndLogin" class="sign-up-form" method="post">
+      <h2 class="title">Sign up</h2>
+      <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="Email" name="uname" required />
+      </div>
+      <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Organisation Name" name="institution" required />
+      </div>
+      <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" name="password" required />
+      </div>
+      <div style="display: flex;justify-content: center;align-items: center;column-gap: 1rem;">
+          <input type="checkbox" name="iagree" required>
+          <p>I agree to all the terms and conditions</p>
+      </div>
+      <input type="submit" class="btn" value="Sign up" name="action" />
+      <!-- ... (keep the rest of the sign-up form) ... -->
+    </form>
+      
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+      <div class="content">
+        <h2>New here ?</h2>
+        <p>
+          Online tutor Finder provides students the best way to reach out the best tutor for them. 
+          Know more about us <a href="file:///G:/AGILE%20workshop/Website/Home%20Page/index.html">here</a>.
+        </p>
+        <button class="btn transparent" id="sign-up-btn">Sign up</button>
+      </div>
+      <img src="images/log.svg" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+      <div class="content">
+        <h2>One of us?</h2>
+        <p>
+          Online tutor Finder provides students the best way to reach out the best tutor for them. 
+          Know more about us <a href="file:///D:/Agile%20Workshop/Reveal/index1.html">here</a>.
+        </p>
+        <button class="btn transparent" id="sign-in-btn">Sign in</button>
+      </div>
+      <!-- <img src="pictures/register.svg" class="image" alt="A picture here"/> -->
+      </div>
+    </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/loginpage.js') }}"></script>
+
+  </body>
+  </html>

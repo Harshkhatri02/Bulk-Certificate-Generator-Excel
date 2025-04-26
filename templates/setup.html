@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Certificate Fields</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #certificate-template {
+            width: 100%;
+            border: 1px solid #ccc;
+            position: relative;
+            min-height: 400px;
+            margin-bottom: 20px;
+        }
+
+        .draggable-field {
+            position: absolute;
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #ccc;
+            cursor: move;
+            user-select: none;
+        }
+
+        .draggable-qr {
+            position: absolute;
+            cursor: move;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .font-settings {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .font-settings label, .font-settings select, .font-settings input {
+            margin-right: 10px;
+        }
+
+        .font-settings input[type="number"] {
+            width: 60px;
+        }
+
+        .font-settings #qrSize {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Setup Certificate Fields</h1>
+        <div id="certificate-template">
+            <img id="template-image" src="/static/uploads/{{ template }}" alt="Certificate Template">
+            {% for field in fields %}
+                <div class="draggable-field" id="{{ field | lower }}" style="left: 0; top: 0;">
+                    {{ field.replace('field_name_', '') }}
+                </div>
+            {% endfor %}
+
+            <!-- QR Code Field -->
+            {% if qr_code_url %}
+                <div class="draggable-qr" id="qr_code" style="left: 0; top: 0;">
+                    <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?data={{ qr_code_url }}&size=100x100" alt="QR Code" style="width: 100px; height: 100px;">
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="font-settings">
+            <label for="fontSelect">Select Font:</label>
+            <select id="fontSelect">
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+            </select>
+
+            <label for="fontSize">Font Size:</label>
+            <input type="number" id="fontSize" value="24" min="10" max="72">
+
+            <label for="qrSize">QR Size:</label>
+            <input type="number" id="qrSize" value="100" min="50" max="300">
+        </div>
+
+        <button id="save-positions-btn">Save Positions</button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.draggable-field, .draggable-qr').forEach(field => {
+            field.addEventListener('mousedown', function(event) {
+                event.preventDefault();
+                let shiftX = event.clientX - field.getBoundingClientRect().left;
+                let shiftY = event.clientY - field.getBoundingClientRect().top;
+
+                function moveAt(pageX, pageY) {
+                    const container = document.getElementById('certificate-template');
+                    let newLeft = pageX - shiftX - container.getBoundingClientRect().left;
+                    let newTop = pageY - shiftY - container.getBoundingClientRect().top;
+
+                    newLeft = Math.max(0, Math.min(newLeft, container.offsetWidth - field.offsetWidth));
+                    newTop = Math.max(0, Math.min(newTop, container.offsetHeight - field.offsetHeight));
+
+                    field.style.left = newLeft + 'px';
+                    field.style.top = newTop + 'px';
+                }
+// On mouse move event this function is called it calls another function to calc. position
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                }
+
+                document.addEventListener('mousemove', onMouseMove);
+// When we release mouse, capture the fields position value
+                field.addEventListener('mouseup', function() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                });
+//Prevent default drag behaviour to implement custom drag behavior
+                field.ondragstart = function() {
+                    return false;
+                };
+            });
+        });
+
+        const fontSelect = document.getElementById('fontSelect');
+        const fontSizeInput = document.getElementById('fontSize');
+        const qrSizeInput = document.getElementById('qrSize');
+
+        function updateFieldPreview() {
+            document.querySelectorAll('.draggable-field').forEach(field => {
+                field.style.fontFamily = fontSelect.value;
+                field.style.fontSize = fontSizeInput.value + 'px';
+            });
+
+            // Update QR code size
+            const qrImage = document.getElementById('qrImage');
+            const size = qrSizeInput.value;
+            qrImage.style.width = size + 'px';
+            qrImage.style.height = size + 'px';
+        }
+
+        fontSelect.addEventListener('change', updateFieldPreview);
+        fontSizeInput.addEventListener('input', updateFieldPreview);
+        qrSizeInput.addEventListener('input', updateFieldPreview);
+
+        document.getElementById('save-positions-btn').addEventListener('click', function() {
+            const positions = {};
+            const selectedFont = fontSelect.value;
+            const selectedFontSize = fontSizeInput.value;
+            const qrSize = qrSizeInput.value;
+
+            document.querySelectorAll('.draggable-field').forEach(field => {
+                positions[field.innerText.trim()] = {
+                    left: field.style.left,
+                    top: field.style.top,
+                    font: selectedFont,
+                    fontSize: selectedFontSize
+                };
+            });
+
+            // Handle QR code position saving
+            const qrCode = document.getElementById('qr_code');
+            if (qrCode) {
+                positions['qr_code'] = {
+                    left: qrCode.style.left,
+                    top: qrCode.style.top,
+                    font: selectedFont,
+                    fontSize: selectedFontSize,
+                    qrSize: qrSize
+                };
+            }
+
+            fetch('/setup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(positions)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'download') {
+                    window.location.href = '/generate-certificates';
+                } else if (data.status === 'success') {
+                    alert('Positions and settings saved successfully!');
+                    window.location.href = '/generate-certificates'; 
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Load positions from JSON file
+        fetch('/positions.json')
+            .then(response => response.json())
+            .then(data => {
+                for (const [field, position] of Object.entries(data)) {
+                    const fieldElement = document.getElementById(field.toLowerCase());
+                    if (fieldElement) {
+                        fieldElement.style.left = position.left;
+                        fieldElement.style.top = position.top;
+                        fieldElement.style.fontFamily = position.font;
+                        fieldElement.style.fontSize = position.fontSize + 'px';
+                    }
+                }
+
+                // Load QR code position
+                const qrCodePosition = data['qr_code'];
+                if (qrCodePosition) {
+                    const qrCodeElement = document.getElementById('qr_code');
+                    qrCodeElement.style.left = qrCodePosition.left;
+                    qrCodeElement.style.top = qrCodePosition.top;
+                    qrSizeInput.value = qrCodePosition.qrSize; // Set QR size input
+                    updateFieldPreview(); // Update QR size
+                }
+            })
+            .catch(error => console.error('Error loading positions:', error));
+
+        updateFieldPreview();
+    </script>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Certificate Fields</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #certificate-template {
+            width: 100%;
+            border: 1px solid #ccc;
+            position: relative;
+            min-height: 400px; /* Adjust height if necessary */
+            margin-bottom: 20px; /* Space between template and button */
+        }
+
+        .draggable-field {
+            position: absolute;
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #ccc;
+            cursor: move;
+            user-select: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Setup Certificate Fields</h1>
+        <div id="certificate-template">
+            <img id="template-image" src="/static/uploads/{{ template }}" alt="Certificate Template">
+            {% for field in fields %}
+                <div class="draggable-field" id="{{ field | lower }}" style="left: 0; top: 0;">{{ field }}</div>
+            {% endfor %}
+        </div>
+        <button id="save-positions-btn">Save Positions</button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.draggable-field').forEach(field => {
+            field.addEventListener('mousedown', function(event) {
+                event.preventDefault();
+                let shiftX = event.clientX - field.getBoundingClientRect().left;
+                let shiftY = event.clientY - field.getBoundingClientRect().top;
+    
+                function moveAt(pageX, pageY) {
+                    const container = document.getElementById('certificate-template');
+                    let newLeft = pageX - shiftX - container.getBoundingClientRect().left;
+                    let newTop = pageY - shiftY - container.getBoundingClientRect().top;
+    
+                    newLeft = Math.max(0, Math.min(newLeft, container.offsetWidth - field.offsetWidth));
+                    newTop = Math.max(0, Math.min(newTop, container.offsetHeight - field.offsetHeight));
+    
+                    field.style.left = newLeft + 'px';
+                    field.style.top = newTop + 'px';
+                }
+    
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                }
+    
+                document.addEventListener('mousemove', onMouseMove);
+    
+                field.addEventListener('mouseup', function() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                });
+    
+                field.ondragstart = function() {
+                    return false;
+                };
+            });
+        });
+    
+        document.getElementById('save-positions-btn').addEventListener('click', function() {
+            const positions = {};
+    
+            document.querySelectorAll('.draggable-field').forEach(field => {
+                positions[field.innerText] = {
+                    left: field.style.left,
+                    top: field.style.top
+                };
+            });
+    
+            fetch('/setup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(positions)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'download') {
+                    window.location.href = '/generate-certificates';
+                } else if (data.status === 'success') {
+                    alert('Positions saved successfully!');
+                    window.location.href = '/generate-certificates'; // Trigger certificate generation
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+    
+</body>
+</html> -->

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Online Certificate Generation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3a7bd5;
+            --secondary-color: #00d2ff;
+            --accent-color: #f9a825;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --background-color: #f0f4f8;
+            --card-bg-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: var(--light-text-color);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-text-color);
+            opacity: 0.8;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h2 {
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #f57f17;
+            transform: scale(1.05);
+        }
+
+        .features {
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            color: var(--light-text-color);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+        }
+
+        .feature-text {
+            color: var(--light-text-color);
+            font-size: 1.1rem;
+        }
+
+        .testimonials {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5rem;
+            color: var(--light-text-color);
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--light-text-color);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .cta-section {
+            text-align: center;
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--light-text-color);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: var(--light-text-color);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg-color);
+            backdrop-filter: blur(10px);
+            color: var(--light-text-color);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .service-card, .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .features, .cta-section {
+                padding: 2rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            opacity: 0;
+        }
+
+        .animate-fadeInUp.active {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="animate-fadeInUp">
+            <h1>Our Comprehensive Services</h1>
+            <p class="subtitle">Elevate Your Certifications with Cutting-Edge Solutions</p>
+        </header>
+        
+        <main>
+            <section class="services">
+                <div class="service-card animate-fadeInUp">
+                    <i class="fas fa-paint-brush"></i>
+                    <h2>Custom Certificate Design</h2>
+                    <p>Create stunning, unique certificates that reflect your brand's identity and professionalism.</p>
+                    <a href="#" class="cta-button">Explore Designs</a>
+                </div>
+                <div class="service-card animate-fadeInUp">
+                    <i class="fas fa-layer-group"></i>
+                    <h2>Bulk Generation</h2>
+                    <p>Effortlessly produce thousands of personalized certificates in minutes with our advanced system.</p>
+                    <a href="#" class="cta-button">Learn More</a>
+                </div>
+                <div class="service-card animate-fadeInUp">
+                    <i class="fas fa-shield-alt"></i>
+                    <h2>Secure Verification</h2>
+                    <p>Ensure certificate authenticity with our robust online verification portal and blockchain technology.</p>
+                    <a href="#" class="cta-button">Verify Now</a>
+                </div>
+                <div class="service-card animate-fadeInUp">
+                    <i class="fas fa-code"></i>
+                    <h2>API Integration</h2>
+                    <p>Seamlessly incorporate our certificate generation service into your existing software ecosystem.</p>
+                    <a href="#" class="cta-button">View API Docs</a>
+                </div>
+            </section>
+
+            <section class="features animate-fadeInUp">
+                <h2>Why Choose Our Service?</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="feature-icon fas fa-tachometer-alt"></i>
+                        <span class="feature-text">Lightning-fast processing</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="feature-icon fas fa-lock"></i>
+                        <span class="feature-text">Bank-grade security</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="feature-icon fas fa-magic"></i>
+                        <span class="feature-text">Easy-to-use interface</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="feature-icon fas fa-cloud"></i>
+                        <span class="feature-text">Cloud-based solution</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="feature-icon fas fa-headset"></i>
+                        <span class="feature-text">24/7 customer support</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="feature-icon fas fa-chart-line"></i>
+                        <span class="feature-text">Detailed analytics</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="testimonials animate-fadeInUp">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"This service has revolutionized our certification process. We've saved countless hours and improved our professional image."</p>
+                        <p class="testimonial-author">- Sarah Johnson, CEO of TechEd Inc.</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The API integration was seamless, and the support team was incredibly helpful throughout the process."</p>
+                        <p class="testimonial-author">- Mark Thompson, CTO of CertifyPro</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"We've received numerous compliments on our certificate designs. This service has truly exceeded our expectations."</p>
+                        <p class="testimonial-author">- Emily Chen, Event Coordinator</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section animate-fadeInUp">
+                <h2>Ready to Elevate Your Certifications?</h2>
+                <p>Join thousands of satisfied clients and experience the future of certificate generation.</p>
+                <a href="#" class="cta-button">Get Started Today</a>
+            </section>
+        </main>
+
+        <footer class="animate-fadeInUp">
+            <p>&copy; 2024 Online Certificate Generation. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-fadeInUp').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>

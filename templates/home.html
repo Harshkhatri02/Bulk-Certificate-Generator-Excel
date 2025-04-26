@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/static/images/">
+    <link rel="shortcut icon" href="logo.jfif" type="image/x-icon">
+    <title>Certify Me - Comprehensive Certification Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Slab:wght@100..900&display=swap'); 
+        :root {
+            --var-background: linear-gradient(135deg, #333333, #777777, #aaaaaa, #9f9f9f, #333333);
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #c0c0c0;
+            --text-color: #333;
+            --background-color: #f5f5f5;
+            --card-bg-col: rgba(255, 255, 255, 0.9);
+            --background-header: #2c2c2e;
+            --background-body: #333333;
+            --background-nav: rgba(255, 255, 255, 0.1);
+            --background-li: #C0C0C0;
+            --background-head-content: rgba(255, 255, 255, 0.2);
+            --background-text-container: linear-gradient(135deg, #333333, #777777, #aaaaaa,#9f9f9f,#333333);
+            --background-transperant: rgba( 255, 255, 255, 0.25 );
+            --h1-color:#28282d;
+        }
+        
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-smooth: always;
+        }
+        a {
+            text-decoration: none;
+        }
+        h1 {
+            font-family: 'Playfair';
+            background-color: var(--h1-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        h2 {
+            font-family: 'Merriweather';
+        }
+        li {
+            font-size: 0.9rem;
+        }
+        p, li {
+            color: black;
+            font-family: 'Roboto Slab';
+            font-weight: 400;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+        ::-webkit-scrollbar {
+            width: 0.7rem;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 1rem;
+        }
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-body);
+        }
+        h1 {
+            user-select: none;
+            background: linear-gradient(45deg, #e0e0e0, #f5f5f5, #c0c0c0, #e0e0e0);
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            font-size: 2.5em;
+            text-align: center;
+            position: relative;
+            padding: 10px;
+        }
+
+        header h1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+            transform: translateX(-50%) skewX(-20deg);
+            transition: 0.7s ease-in-out;
+        }
+
+        h1:hover::before {
+            left: 99%;
+        }
+        .container {
+            background: var(--background-text-container);
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            color: aliceblue;
+            position: fixed;
+            top: 0;
+            z-index: +2;
+            background: #2c2c2e;
+            display: grid; 
+            border-bottom: #888 solid;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo-container img {
+            margin-right: 1rem;
+            border-radius: 50%;
+            height: 10vh;
+            width: 5vw;
+        }
+        
+        #nav {
+            display: flex;
+            justify-content: space-around;
+            column-gap: 10vw;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            width: 99vw;
+            height: 12vh;
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            box-shadow: none;
+            backdrop-filter: blur( 4px );
+            -webkit-backdrop-filter: blur( 4px );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+        #nav:hover {
+            box-shadow: 0 8px 32px 0 rgba(249, 249, 250, 0.37);
+        }
+        .list-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .list-container ul {
+            display: flex;
+            list-style: none;
+        }
+        .list-container ul li {
+            user-select: none;
+            margin-right: 1rem;
+            border: rgba(255, 255, 255, 0.604) solid 2px;
+            padding: 0.7rem 2rem;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1.2px black solid;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+            rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+            rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+            rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+            border-radius: 1rem;
+            color: #fffffff9;
+            background-color: #C0C0C0;
+        }       
+        .list-container ul li:hover {
+            color: black;
+            background: linear-gradient(45deg, #e0e0e0, #f5f5f5, #c0c0c0, #e0e0e0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            transform: translateY(-3px);
+        }
+        
+        .list-container ul li:active {
+            color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+        }
+        
+        @keyframes moveUp {
+            0% {
+                height: 5vh;
+            }
+            100% {
+                height: 1vh;
+            }
+        }
+        
+        main {
+            margin-top: 12vh;
+            padding: 0.5rem 5rem;
+        }
+
+        /* New styles for the homepage content */
+        .hero {
+            border-radius: 0.2rem;
+            height: calc(100vh - 12vh);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:url(https://i.pinimg.com/236x/e2/99/2b/e2992b1a27f73b4f031ee8ba2e6e8324.jpg);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero-content {
+            border: 0.5px solid silver;
+            text-align: center;
+            padding: 2rem;
+            /* background: rgba( 255, 255, 255, 0.25 ); */
+            background: var(--background-transperant);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color:var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: black;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 0.5px solid;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .features {
+            padding: 4rem 0;
+            background: var(--background-text-container);
+            margin-bottom: 0.3rem;
+        }
+
+        .features h3 {
+            font-family: 'Merriweather';
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background: var(--background-transperant);
+            /* background: var(--card-bg-col); */
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            #nav {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem 0;
+            }
+
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+
+            .list-container ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .list-container ul li {
+                margin: 0.5rem 0;
+            }
+/* Add this to your existing CSS */
+.list-container ul li.active {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* New */
+        .how-it-works .container{
+            padding-bottom: 2rem;
+        }
+        .how-it-works{
+            margin-bottom: 0.3rem;
+        }
+
+        .how-it-works>.container,.faq>.container{
+            width: 100%;
+        }
+        .how-it-works h3, .testimonials h3, .faq h3 {
+            font-family: 'Merriweather';
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+      
+        
+        .how-it-works-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .step {
+            text-align: center;
+            width: 200px;
+        }
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        /* .pricing .container{
+            padding: 0;
+        } */
+     
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+        .faq-question {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .faq-answer {
+            --webkit-font-smoothing:antialiased;
+            border:5px solid silver;
+            background-color: var(--background-text-container);
+            padding: 1rem;
+            border-radius: 0 0 5px 5px;
+            display: none;
+        }
+        footer {
+            padding: 0;
+            text-align: center;
+        }
+        footer .container{
+            max-width:88%;
+            /* border: pink solid; */
+        }
+        .social-links {
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: var(--primary-color);
+            /* color: white; */
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+        @media (max-width: 768px) {
+            #nav {
+                flex-direction: column;
+            }
+            .list-container {
+                margin-top: 1rem;
+            }
+            .list-container ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .list-container ul li {
+                margin: 0.5rem 0;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="nav">
+            <div class="logo-container">
+                <img src="logo.jfif" alt="Certify Me Logo">
+                <h1>Certify Me</h1>
+            </div>
+            <div class="list-container">
+                <ul>
+                    <a href="/home"><li>Home</li></a>
+                    <a href="/tools"><li>Tools</li></a>
+                    <a href="/about_us"><li>About Us</li></a>
+                    <a href="/our_services"><li>Our Services</li></a>
+                    {% if user %}
+                        <a href="/logout"><li>Logout</li></a>
+                    {% else %}
+                        <a href="/signupAndLogin"><li>SignUp/Login</li></a>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <!-- {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p style="color: white;">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %} -->
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h2>Professional Certification Made Easy</h2>
+                <p>Create, manage, and verify certificates for your organization or event with just a few clicks.</p>
+                <a href="#" class="cta-button">Get Started</a>
+            </div>
+        </section>
+        <section class="features" id="services">
+            <h3>Our Services</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Custom Design</h4>
+                    <p>Create unique certificate designs that match your brand and event style.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Bulk Generation</h4>
+                    <p>Generate hundreds of certificates in seconds with our efficient bulk processing.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Digital Verification</h4>
+                    <p>Ensure the authenticity of your certificates with our secure verification system.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>User-Friendly</h4>
+                    <p>Access and manage your certificates from anywhere, anytime with our user-friendly interface</p>
+                </div>
+            </div>
+        </section>
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h3>How It Works</h3>
+                <div class="how-it-works-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Create Template Image</h4>
+                        <p>Get Your Template Ready of Your Organisation Event or Opportunity</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Upload Template</h4>
+                        <p>Upload the Template Image in our Tools Section</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Enter/Upload Achiever's and Verification Details </h4>
+                        <p>Upload the Achiever details Manually or by Excel Files for Bulk Generation with Link for Qr Attachment </p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Place the Achiever Details and Qr Image</h4>
+                        <p>Place the Details as per Your Convinience and Our system automatically generates certificates for all recipients.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+        <section id="faq" class="faq">
+            <div class="container">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">How secure are the digital certificates?</div>
+                        <div class="faq-answer">Our digital certificates use advanced encryption and blockchain technology to ensure maximum security and authenticity.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Can I integrate Certify Me with my existing systems?</div>
+                        <div class="faq-answer">Yes, our API allows for seamless integration with most existing systems and workflows.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">How long does it take to set up?</div>
+                        <div class="faq-answer">Most users can set up their first certificate template and start issuing certificates within an hour of signing up.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Do you offer custom branding options?</div>
+                        <div class="faq-answer">Absolutely! Our platform allows for full customization of certificate designs to match your brand identity.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>Certify Me.</p>
+        </div>
+    </footer>
+
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Simple parallax effect for the hero section
+    window.addEventListener('scroll', () => {
+        const hero = document.querySelector('.hero');
+        const scrollPosition = window.pageYOffset;
+        hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+    });
+
+    // Highlight active navigation item
+    function highlightActiveNavItem() {
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.list-container ul li');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(li => {
+                li.classList.remove('active');
+                if (li.querySelector('a') && li.querySelector('a').getAttribute('href') === `#${current}`) {
+                    li.classList.add('active');
+                }
+            });
+        });
+    }
+
+    // Call the function to enable active navigation highlighting
+    highlightActiveNavItem();
+
+    // Add a simple loading animation
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
+
+    // Add a scroll-to-top button
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '&#8679;';
+    scrollToTopBtn.setAttribute('id', 'scrollToTopBtn');
+    document.body.appendChild(scrollToTopBtn);
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.display = 'block';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    });
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Certificate Fields</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #certificate-template {
+            width: 100%;
+            border: 1px solid #ccc;
+            position: relative;
+            min-height: 500px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        #template-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .draggable-field {
+            position: absolute;
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            cursor: move;
+            user-select: none;
+            white-space: nowrap;
+            border-radius: 4px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Setup Certificate Fields</h1>
+        <div id="certificate-template">
+            <img id="template-image" src="/static/uploads/{{ template }}" alt="Certificate Template">
+            {% for field in fields %}
+                <div class="draggable-field" id="{{ field | lower }}" style="left: 0; top: 0;">{{ field }}</div>
+            {% endfor %}
+        </div>
+        <button id="save-positions-btn">Save Positions</button>
+    </div>
+
+    <script>
+        // Make the fields draggable
+        document.querySelectorAll('.draggable-field').forEach(field => {
+            field.addEventListener('mousedown', function(event) {
+                event.preventDefault();
+                let shiftX = event.clientX - field.getBoundingClientRect().left;
+                let shiftY = event.clientY - field.getBoundingClientRect().top;
+
+                function moveAt(pageX, pageY) {
+                    const container = document.getElementById('certificate-template');
+                    let newLeft = pageX - shiftX - container.getBoundingClientRect().left;
+                    let newTop = pageY - shiftY - container.getBoundingClientRect().top;
+
+                    newLeft = Math.max(0, Math.min(newLeft, container.offsetWidth - field.offsetWidth));
+                    newTop = Math.max(0, Math.min(newTop, container.offsetHeight - field.offsetHeight));
+
+                    field.style.left = newLeft + 'px';
+                    field.style.top = newTop + 'px';
+                }
+
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                }
+
+                document.addEventListener('mousemove', onMouseMove);
+
+                field.addEventListener('mouseup', function() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                });
+
+                field.ondragstart = function() {
+                    return false;
+                };
+            });
+        });
+
+        // Save positions as percentages
+        document.getElementById('save-positions-btn').addEventListener('click', function() {
+            const positions = {};
+
+            document.querySelectorAll('.draggable-field').forEach(field => {
+                const container = document.getElementById('certificate-template');
+                const fieldLeft = (parseFloat(field.style.left) / container.offsetWidth) * 100; // Calculate as percentage
+                const fieldTop = (parseFloat(field.style.top) / container.offsetHeight) * 100;
+
+                positions[field.innerText] = {
+                    left: fieldLeft.toFixed(2) + '%',
+                    top: fieldTop.toFixed(2) + '%'
+                };
+            });
+
+            // Send the positions to the server
+            fetch('/setup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(positions)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'download') {
+                    window.location.href = '/generate-certificates';
+                } else if (data.status === 'success') {
+                    alert('Positions saved successfully!');
+                    window.location.href = '/generate-certificates';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
