@@ -1,30 +1,73 @@
-from flask import Flask, render_template, request, redirect, session, send_file, jsonify, flash,url_for
+from flask import Flask, render_template, request, redirect, session, send_file, jsonify, flash, url_for
 from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
 import os
 import shutil
 import json
 import mysql.connector
-from datetime import datetime
+from datetime import datetime, timedelta
 import qrcode
 from werkzeug.security import generate_password_hash, check_password_hash
 from mysql.connector import Error
 from dotenv import load_dotenv
+from werkzeug.utils import secure_filename
+import logging
+from logging.handlers import RotatingFileHandler
 
 # Load environment variables
 load_dotenv()
 
+# Configure logging
+logging.basicConfig(
+    handlers=[RotatingFileHandler('app.log', maxBytes=10000, backupCount=3)],
+    level=logging.INFO,
+    format='[%(asctime)s] %(levelname)s in %(module)s: %(message)s'
+)
+
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', os.urandom(24))  # Use environment variable for secret key
+
+# Security configurations
+app.secret_key = os.getenv('SECRET_KEY')
+app.config['MAX_CONTENT_LENGTH'] = int(os.getenv('MAX_CONTENT_LENGTH', 16777216))
+app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'static/uploads')
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(seconds=int(os.getenv('PERMANENT_SESSION_LIFETIME', 1800)))
+app.config['SESSION_PERMANENT'] = os.getenv('SESSION_PERMANENT', 'False').lower() == 'true'
+
+# Ensure upload directory exists
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Allowed file extensions
+ALLOWED_EXTENSIONS = set(os.getenv('ALLOWED_EXTENSIONS', 'pdf,png,jpg,jpeg').split(','))
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def secure_file_path(filename):
+    """Ensure file path is secure and within allowed directory"""
+    filename = secure_filename(filename)
+    return os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
 def create_connection():
-    connection = mysql.connector.connect(
-        host=os.getenv('DB_HOST', 'localhost'),
-        user=os.getenv('DB_USER', 'root'),
-        password=os.getenv('DB_PASSWORD', ''),
-        database=os.getenv('DB_NAME', 'certificateGen')
-    )
-    return connection
+    try:
+        connection = mysql.connector.connect(
+            host=os.getenv('DB_HOST', 'localhost'),
+            user=os.getenv('DB_USER', 'root'),
+            password=os.getenv('DB_PASSWORD', ''),
+            database=os.getenv('DB_NAME', 'certificateGen')
+        )
+        return connection
+    except Error as e:
+        logging.error(f"Database connection error: {e}")
+        raise
+
+# Error handlers
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('500.html'), 500
 
 def insert_update(connection, email):
     try:
@@ -374,4 +417,8 @@ def generate_certificates():
         return f"An error occurred: {e}", 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host='0.0.0.0',
+        port=int(os.getenv('PORT', 5000)),
+        debug=os.getenv('DEBUG', 'False').lower() == 'true'
+    )

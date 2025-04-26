@@ -1,16 +1,25 @@
+# Environment variables
+.env
+
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.env
-*.log
-.DS_Store
+
+# Project specific
 certificates/
 outputs/
 certificates.zip
 data.xlsx
-.env.local
-.env.*.local
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
