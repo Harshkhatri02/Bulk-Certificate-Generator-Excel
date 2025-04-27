@@ -28,7 +28,20 @@ A web application for generating customized certificates with dynamic fields and
    pip install -r requirements.txt
    ```
 3. Create a `.env` file with your configuration
-4. Initialize the MySQL database
+4. Initialize the MySQL database:
+   ```bash
+   # Log into MySQL
+   mysql -u your_db_user -p
+   
+   # Create the database
+   CREATE DATABASE your_db_name;
+   
+   # Exit MySQL
+   exit;
+   
+   # Import the database schema
+   mysql -u your_db_user -p your_db_name < database_setup.sql
+   ```
 5. Run the application:
    ```bash
    python app.py
